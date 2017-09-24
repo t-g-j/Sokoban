@@ -36,6 +36,13 @@ public:
     void topsort();
     void printIndegree();
     void printGraph();
+    
+    void setAGoal(int goalNode);
+    
+    
+    //Debug
+    void isGoal(int goalNode1, int goalNode2);
+    
 
 /****** KRUSKAL****/
     

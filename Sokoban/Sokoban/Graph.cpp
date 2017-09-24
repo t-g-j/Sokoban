@@ -33,6 +33,14 @@ void Graph::addEdge(int src, int dest, int cost)
     edgePointer.push_back(newEdge);
 
 }
+void Graph::isGoal(int goalNode1, int goalNode2){
+    cout<<"bool: "<<nodes[goalNode1]->getGoalstate()<<endl;
+}
+
+void Graph::setAGoal(int goalNode){
+    nodes[goalNode]->setGoal();
+}
+
 
 void Graph::findNewVertexOfIndegreeZero()
 {
