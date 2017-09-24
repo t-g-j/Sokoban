@@ -8,10 +8,12 @@
 
 #include <iostream>
 #include "Box.hpp"
-#include "Dijkstra.hpp"
+
 #include "Edge.hpp"
 #include "Graph.hpp"
 #include "Vertex.hpp"
+
+#include "Astar.hpp"
 
 int main() {
     // insert code here...
@@ -59,10 +61,12 @@ int main() {
     g.addEdge(8, 5, 1);
     g.addEdge(8, 7, 1);
     
-    
+    std::cout<<"false is "<<false<<"\ttrue is "<<true<<std::endl;
 //    cout<<"GRAPH REPRESENTATION"<<endl;
 //    g.printGraph();
-
+    g.setAGoal(0);
+    g.isGoal(1, 2);
+ 
     
     return 0;
 }

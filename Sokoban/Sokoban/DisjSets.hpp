@@ -3,7 +3,7 @@
 //  Graphs
 //
 //  Created by Thor Gunnlaugsson on 08/12/2016.
-//  Copyright © 2016 Mjøjlner. All rights reserved.
+//  Copyright © 2016 Mjølner. All rights reserved.
 //
 
 #ifndef DisjSets_hpp

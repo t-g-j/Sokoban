@@ -6,6 +6,10 @@
 //  Copyright © 2016 Mjøjlner. All rights reserved.
 //
 
+/*
+ * Add publics function and private member for setting start and goal node
+ */
+
 #ifndef Vertex_hpp
 #define Vertex_hpp
 
@@ -32,6 +36,12 @@ public:
     void incrementIndegree();
     int getIndegree();
     
+    // Set the start and goal node.
+    void setGoal();
+    void setStart();
+    
+    bool getGoalstate();
+    
     vector<Edge*> EdgeInList;
     
     
@@ -40,6 +50,10 @@ public:
 
 
 private:
+    //start and stop signals for A*
+    bool start;
+    bool goal;
+    
     int name;
     int indegree;
     

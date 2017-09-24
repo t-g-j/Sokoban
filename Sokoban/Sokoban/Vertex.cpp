@@ -15,8 +15,19 @@ Vertex::Vertex()
 
 Vertex::Vertex(int id)
 {
+    start = false;
+    goal = false;
     indegree=0;
     name = id;
+}
+void Vertex::setGoal(){
+    goal = true;
+}
+void Vertex::setStart(){
+    start = true;
+}
+bool Vertex::getGoalstate(){
+    return goal;
 }
 
 int Vertex::getIndegree()
