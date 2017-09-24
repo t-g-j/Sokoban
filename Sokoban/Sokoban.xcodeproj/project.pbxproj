@@ -13,6 +13,7 @@
 		F7CBC7531F77BF740087F4CF /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7CBC74A1F77BF720087F4CF /* Edge.cpp */; };
 		F7CBC7541F77BF740087F4CF /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7CBC74C1F77BF730087F4CF /* Graph.cpp */; };
 		F7CBC7551F77BF740087F4CF /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7CBC74D1F77BF730087F4CF /* Vertex.cpp */; };
+		F7DC70FA1F77CFD20026C998 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7DC70F81F77CFD20026C998 /* Box.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		F7CBC74E1F77BF730087F4CF /* Vertex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
 		F7CBC74F1F77BF740087F4CF /* Edge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Edge.hpp; sourceTree = "<group>"; };
 		F7CBC7501F77BF740087F4CF /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
+		F7DC70F81F77CFD20026C998 /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
+		F7DC70F91F77CFD20026C998 /* Box.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				F7CBC7401F77BF150087F4CF /* main.cpp */,
+				F7DC70F81F77CFD20026C998 /* Box.cpp */,
+				F7DC70F91F77CFD20026C998 /* Box.hpp */,
 				F7CBC7471F77BF720087F4CF /* Dijkstra.cpp */,
 				F7CBC74B1F77BF730087F4CF /* Dijkstra.hpp */,
 				F7CBC7481F77BF720087F4CF /* DisjSets.cpp */,
@@ -150,6 +155,7 @@
 				F7CBC7551F77BF740087F4CF /* Vertex.cpp in Sources */,
 				F7CBC7521F77BF740087F4CF /* DisjSets.cpp in Sources */,
 				F7CBC7541F77BF740087F4CF /* Graph.cpp in Sources */,
+				F7DC70FA1F77CFD20026C998 /* Box.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

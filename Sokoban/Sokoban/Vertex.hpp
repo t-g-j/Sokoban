@@ -13,6 +13,7 @@
 #include "Edge.hpp"
 #include <vector>
 
+
 using namespace std;
 
 class Edge;
@@ -24,6 +25,8 @@ public:
     Vertex(int id);
     int getIdentifier();
     
+    
+    
     void decrementIndegree();
     
     void incrementIndegree();
@@ -32,6 +35,7 @@ public:
     vector<Edge*> EdgeInList;
     
     
+
     ~Vertex();
 
 
