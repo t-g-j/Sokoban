@@ -39,7 +39,12 @@ public:
     
     void setAGoal(int goalNode);
     
+    //Sokoban functions
     
+    void InitializeEmpyt(const int x, const int y);
+    void printMatrix(int x, int y);
+    vector<vector<Vertex*>> addVertex(int x, int y);
+    void sokoAddEdge(int src, int dest, int cost);
     //Debug
     void isGoal(int goalNode1, int goalNode2);
     
@@ -52,10 +57,18 @@ public:
     queue<Edge*> cheapQueue(vector<Edge*>ks);
     ~Graph();
 private:
+    /*-------- Sokoban privates --------*/
+    vector<Vertex*> sokoRow;
+    vector<vector<Vertex*> > sokoMatrix;
+    int nrDiamonds;
     
+    /*----------------------------------*/
     vector<Vertex*> nodes;
-    
+
     vector<Edge*>edgePointer;
+    
+    
+    
     
     vector<Edge*> mst;// minimum spanning tree
     

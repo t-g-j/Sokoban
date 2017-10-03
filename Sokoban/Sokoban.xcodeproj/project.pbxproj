@@ -13,7 +13,6 @@
 		F7CBC7541F77BF740087F4CF /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7CBC74C1F77BF730087F4CF /* Graph.cpp */; };
 		F7CBC7551F77BF740087F4CF /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7CBC74D1F77BF730087F4CF /* Vertex.cpp */; };
 		F7DC70FA1F77CFD20026C998 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7DC70F81F77CFD20026C998 /* Box.cpp */; };
-		F7FEDF981F7811F500CBADA9 /* Astar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7FEDF961F7811F500CBADA9 /* Astar.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,8 +40,6 @@
 		F7CBC7501F77BF740087F4CF /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
 		F7DC70F81F77CFD20026C998 /* Box.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
 		F7DC70F91F77CFD20026C998 /* Box.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
-		F7FEDF961F7811F500CBADA9 /* Astar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Astar.cpp; sourceTree = "<group>"; };
-		F7FEDF971F7811F500CBADA9 /* Astar.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Astar.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				F7CBC7401F77BF150087F4CF /* main.cpp */,
-				F7FEDF961F7811F500CBADA9 /* Astar.cpp */,
-				F7FEDF971F7811F500CBADA9 /* Astar.hpp */,
 				F7DC70F81F77CFD20026C998 /* Box.cpp */,
 				F7DC70F91F77CFD20026C998 /* Box.hpp */,
 				F7CBC7481F77BF720087F4CF /* DisjSets.cpp */,
@@ -155,7 +150,6 @@
 				F7CBC7521F77BF740087F4CF /* DisjSets.cpp in Sources */,
 				F7CBC7541F77BF740087F4CF /* Graph.cpp in Sources */,
 				F7DC70FA1F77CFD20026C998 /* Box.cpp in Sources */,
-				F7FEDF981F7811F500CBADA9 /* Astar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

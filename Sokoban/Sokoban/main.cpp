@@ -13,7 +13,7 @@
 #include "Graph.hpp"
 #include "Vertex.hpp"
 
-#include "Astar.hpp"
+
 
 int main() {
     // insert code here...
@@ -64,10 +64,16 @@ int main() {
     std::cout<<"false is "<<false<<"\ttrue is "<<true<<std::endl;
 //    cout<<"GRAPH REPRESENTATION"<<endl;
 //    g.printGraph();
+ 
+    
     g.setAGoal(0);
     g.isGoal(1, 2);
  
     
+    Graph soko;
+    soko.InitializeEmpyt(5, 10);
+    soko.printMatrix(5,10);
+  
     return 0;
 }
 

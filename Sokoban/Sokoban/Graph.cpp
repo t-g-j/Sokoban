@@ -20,6 +20,34 @@ Graph::Graph(int N)
         nodes.push_back(newVertex);
     }
 }
+/* not working */
+void Graph::InitializeEmpyt(const int x, const int y){
+    for (int i = 0; i<x; i++) {
+        sokoRow.push_back(nullptr);
+        for (int j = 0 ; j<y; j++) {
+            sokoMatrix.push_back(sokoRow);
+        }
+    }
+}
+/* not working */
+void Graph::printMatrix(int x, int y){
+    for (int i=0; i<x; i++) {
+        for (int j=0; j<y; j++) {
+            cout<<sokoMatrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+vector<vector<Vertex*>> Graph::addVertex(int x, int y){
+    Vertex * newVertex = new Vertex(1);
+    sokoMatrix[x][y]= newVertex;
+    return sokoMatrix;
+}
+void Graph::sokoAddEdge(int src, int dest, int cost){
+    
+}
+
+
 
 
 

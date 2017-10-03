@@ -19,6 +19,7 @@ Vertex::Vertex(int id)
     goal = false;
     indegree=0;
     name = id;
+    
 }
 void Vertex::setGoal(){
     goal = true;
