@@ -191,6 +191,46 @@ void Graph::printTree( vector<Edge*> ks)
     }
 
 }
+/*******************************
+ SOKOBAN MAP RELATED FUNCTIONS
+ *******************************/
+/*
+ *Function for reading our map into private member for graph class
+ */
+void Graph::readMap(const string dest){
+    string line;                    //string for reading each line
+    ifstream sokoMap(dest);         //opening file from the destination
+    if(sokoMap.is_open() ){         //if the file is opened commence reading
+        while (getline(sokoMap,line) ) {        // read one line at a time in the whole file
+            map_content += line;                // append line into one big string
+            map_content += "\n";                // append newline after each line
+            }
+        }
+    else{
+        cout<<"could not open file. Check path to file"<<endl;  //Debug line
+    }
+}
+/*
+ * Print private member containing the map
+ */
+void Graph::printMapContent(){
+    cout<<map_content<<endl;
+}
+/*
+ *Mapping the string onto a matrix containing only integers
+ */
+void Graph::makingMatrix(){
+    string test2 = {"bla bla bla i"};
+    string tmp;
+    for(int i = 0 ; i<test.size();i++){
+        tmp = test[i];
+        if (tmp == "i") {
+            cout <<true<<endl;
+        }
+        else cout<<false<<endl;
+    }
+    
+}
 
 Graph::~Graph()
 {

@@ -71,9 +71,14 @@ int main() {
  
     
     Graph soko;
-    soko.InitializeEmpyt(5, 10);
-    soko.printMatrix(5,10);
+    //soko.InitializeEmpyt(5, 10);
+    //soko.printMatrix(5,10);
   
+    Graph map;
+    map.readMap("/Volumes/Second_HDD/tgj/github/Sokoban/Sokoban/testMap.txt");
+    map.printMapContent();
+    map.makingMatrix();
+    
     return 0;
 }
 

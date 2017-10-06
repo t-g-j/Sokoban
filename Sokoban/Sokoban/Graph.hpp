@@ -20,6 +20,7 @@
 #include <vector>
 #include <queue>
 
+#include <fstream>
 
 using namespace std;
 
@@ -39,14 +40,22 @@ public:
     
     void setAGoal(int goalNode);
     
-    //Sokoban functions
+    
+    /*******************************
+     SOKOBAN MAP RELATED FUNCTIONS
+     *******************************/
+    void readMap(const string dest);
+    void makingMatrix();
     
     void InitializeEmpyt(const int x, const int y);
     void printMatrix(int x, int y);
     vector<vector<Vertex*>> addVertex(int x, int y);
     void sokoAddEdge(int src, int dest, int cost);
-    //Debug
+    /*******************************
+     DEBUG
+     *******************************/
     void isGoal(int goalNode1, int goalNode2);
+    void printMapContent();     //Printing the map read from .txt file
     
 
 /****** KRUSKAL****/
@@ -60,8 +69,11 @@ private:
     /*-------- Sokoban privates --------*/
     vector<Vertex*> sokoRow;
     vector<vector<Vertex*> > sokoMatrix;
+    vector<vector<int>>mapMatrix;
+    string test = {"this is my test 1234567890"};        //only for debugging purpose 5/10-2017
     int nrDiamonds;
     
+    string map_content;
     /*----------------------------------*/
     vector<Vertex*> nodes;
 
