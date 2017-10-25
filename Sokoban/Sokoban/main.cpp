@@ -77,7 +77,7 @@ int main() {
     Graph map;
     map.readMap("/Volumes/Second_HDD/tgj/github/Sokoban/Sokoban/testMap.txt");
     map.printMapContent();
-    map.makingMatrix();
+    map.printMapMatrix();
     
     return 0;
 }

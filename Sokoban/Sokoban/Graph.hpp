@@ -45,7 +45,10 @@ public:
      SOKOBAN MAP RELATED FUNCTIONS
      *******************************/
     void readMap(const string dest);
-    void makingMatrix();
+    void makingMatrix(string line);
+    
+    
+    
     
     void InitializeEmpyt(const int x, const int y);
     void printMatrix(int x, int y);
@@ -56,6 +59,8 @@ public:
      *******************************/
     void isGoal(int goalNode1, int goalNode2);
     void printMapContent();     //Printing the map read from .txt file
+    void printfunc(vector<int> anyVec);
+    void printMapMatrix();
     
 
 /****** KRUSKAL****/
@@ -69,7 +74,9 @@ private:
     /*-------- Sokoban privates --------*/
     vector<Vertex*> sokoRow;
     vector<vector<Vertex*> > sokoMatrix;
-    vector<vector<int>>mapMatrix;
+    vector<vector<int> >mapMatrix;
+    vector<int>mapRow;
+    
     string test = {"this is my test 1234567890"};        //only for debugging purpose 5/10-2017
     int nrDiamonds;
     

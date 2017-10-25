@@ -200,16 +200,88 @@ void Graph::printTree( vector<Edge*> ks)
 void Graph::readMap(const string dest){
     string line;                    //string for reading each line
     ifstream sokoMap(dest);         //opening file from the destination
+    int counter = 0;
+    int ifcount =0;
     if(sokoMap.is_open() ){         //if the file is opened commence reading
         while (getline(sokoMap,line) ) {        // read one line at a time in the whole file
             map_content += line;                // append line into one big string
-            map_content += "\n";                // append newline after each line
+            if (counter >=1){                   // counter for skipping the first line
+//                cout<<line<<endl;
+            makingMatrix(line);              //Function call to see whats in the row
+                ifcount ++;
             }
+            map_content += "\n";                // append newline after each line
+            counter ++;
+            }
+//        cout<<counter<<endl;
+//        cout<<ifcount<<endl;
         }
+    
     else{
         cout<<"could not open file. Check path to file"<<endl;  //Debug line
     }
+    sokoMap.close();
 }
+/*
+ * Making each row for the matrix and pushback the row in the end.
+ */
+void Graph::makingMatrix(string line){
+    string tmp;                             //Dummie string used for checkink upon
+    for (int i = 0; i<line.size(); i++) {
+        tmp = line[i];
+        if (tmp == " ") {
+            mapRow.push_back(0);
+        }
+        if (tmp == "X") {
+            mapRow.push_back(1);
+        }
+        if (tmp == ".") {
+            mapRow.push_back(2);
+        }
+        if (tmp == "J") {
+            mapRow.push_back(8);
+        }
+        if (tmp == "G") {
+            mapRow.push_back(9);
+        }
+        if (tmp == "M") {
+            mapRow.push_back(5);
+        }
+    }
+    mapMatrix.push_back(mapRow);        //Pushing back the row onto our matrix
+    printfunc(mapRow);                  //Print function for the row
+    mapRow.clear();                     // Clearing the row for next line
+
+}
+/*
+ * Prints whatever vector you give it
+ */
+void Graph::printfunc(vector<int> anyVec){
+    for (int i = 0 ; i<anyVec.size(); i++) {
+        cout<<anyVec[i]<<" ";
+    }
+    cout<<endl;
+}
+/*
+ * Print the Map in matrix format.
+ */
+void Graph::printMapMatrix(){
+    /*
+    for (int i = 0; i<9; i++) {
+        cout<<mapMatrix[i][0]<<" ";
+    }
+    cout<<endl;
+    */
+    cout<<endl;
+    for (int i = 0; i<8; i++) {
+        for (int j = 0; j<10; j++) {
+            cout<<mapMatrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    
+}
+
 /*
  * Print private member containing the map
  */
@@ -219,18 +291,7 @@ void Graph::printMapContent(){
 /*
  *Mapping the string onto a matrix containing only integers
  */
-void Graph::makingMatrix(){
-    string test2 = {"bla bla bla i"};
-    string tmp;
-    for(int i = 0 ; i<test.size();i++){
-        tmp = test[i];
-        if (tmp == "i") {
-            cout <<true<<endl;
-        }
-        else cout<<false<<endl;
-    }
-    
-}
+
 
 Graph::~Graph()
 {
