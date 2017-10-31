@@ -46,7 +46,8 @@ public:
      *******************************/
     void readMap(const string dest);
     void makingMatrix(string line);
-    
+    void makeGraph();
+    void extractData(string line);
     
     
     
@@ -74,11 +75,15 @@ private:
     /*-------- Sokoban privates --------*/
     vector<Vertex*> sokoRow;
     vector<vector<Vertex*> > sokoMatrix;
+    /*-------- MAP privates --------*/
     vector<vector<int> >mapMatrix;
     vector<int>mapRow;
+    int nrDiamonds;
+    int rows;
+    int cols;
     
     string test = {"this is my test 1234567890"};        //only for debugging purpose 5/10-2017
-    int nrDiamonds;
+    
     
     string map_content;
     /*----------------------------------*/

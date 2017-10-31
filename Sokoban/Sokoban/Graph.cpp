@@ -205,6 +205,10 @@ void Graph::readMap(const string dest){
     if(sokoMap.is_open() ){         //if the file is opened commence reading
         while (getline(sokoMap,line) ) {        // read one line at a time in the whole file
             map_content += line;                // append line into one big string
+            if (counter == 0) {
+                extractData(line);
+                cout<<line<<endl;
+            }
             if (counter >=1){                   // counter for skipping the first line
 //                cout<<line<<endl;
             makingMatrix(line);              //Function call to see whats in the row
@@ -222,9 +226,10 @@ void Graph::readMap(const string dest){
     }
     sokoMap.close();
 }
-/*
+
+/*******************************
  * Making each row for the matrix and pushback the row in the end.
- */
+ *******************************/
 void Graph::makingMatrix(string line){
     string tmp;                             //Dummie string used for checkink upon
     for (int i = 0; i<line.size(); i++) {
@@ -253,18 +258,56 @@ void Graph::makingMatrix(string line){
     mapRow.clear();                     // Clearing the row for next line
 
 }
-/*
+void Graph::extractData(string line){
+    string tmpTier;
+    string tmpEtter;
+    int asciiCorrector = 48;
+    for (int i = 0; i<line.size(); i+= 3) {
+        tmpTier = line[i];
+        tmpEtter= line[i+1];
+        cout<<endl<<tmpTier<<" "<<tmpEtter<<" ";
+        //cout<<tmpEtter<<" ";
+        if (i==0) {
+            //cout<<tmp<<endl;
+            cols = (tmpTier[0]-asciiCorrector)*10 +(tmpEtter[0]-asciiCorrector);
+        }
+        if (i==3) {
+            if (tmpTier == "0") {
+                //cout<<"tmpEtter"<<tmpEtter<<endl;
+                rows =tmpEtter[0]-asciiCorrector;
+               // cout<<"cols"<<cols;
+            }
+            else{
+            rows = (tmpTier[0]-asciiCorrector)*10 +(tmpEtter[0]-asciiCorrector);
+            }
+        }
+        if (i==6) {
+            if (tmpTier == "0") {
+                //cout<<"tmpEtter"<<tmpEtter<<endl;
+                nrDiamonds =tmpEtter[0]-asciiCorrector;
+                // cout<<"cols"<<cols;
+            }
+            else{
+                nrDiamonds = (tmpTier[0]-asciiCorrector)*10 +(tmpEtter[0]-asciiCorrector);
+            }
+        }
+                
+        }
+    cout<<endl<<"rows:\t"<<rows<<endl<<"cols:\t"<<cols<<endl<<"Diamonds:\t"<<nrDiamonds<<endl;
+}
+
+/********************************
  * Prints whatever vector you give it
- */
+ *******************************/
 void Graph::printfunc(vector<int> anyVec){
     for (int i = 0 ; i<anyVec.size(); i++) {
         cout<<anyVec[i]<<" ";
     }
     cout<<endl;
 }
-/*
+/*******************************
  * Print the Map in matrix format.
- */
+ *******************************/
 void Graph::printMapMatrix(){
     /*
     for (int i = 0; i<9; i++) {
@@ -272,14 +315,14 @@ void Graph::printMapMatrix(){
     }
     cout<<endl;
     */
+    
     cout<<endl;
-    for (int i = 0; i<8; i++) {
-        for (int j = 0; j<10; j++) {
+    for (int i = 0; i<rows; i++) {
+        for (int j = 0; j<cols; j++) {
             cout<<mapMatrix[i][j]<<" ";
         }
         cout<<endl;
     }
-    
 }
 
 /*
@@ -288,9 +331,17 @@ void Graph::printMapMatrix(){
 void Graph::printMapContent(){
     cout<<map_content<<endl;
 }
-/*
- *Mapping the string onto a matrix containing only integers
- */
+/*******************************
+ * Mapping the Matrix into a graph structure.
+ *******************************/
+void Graph::makeGraph(){
+    for (int i = 0; i<rows; i++) {
+        for (int j = 0; j<cols; i++) {
+            
+            //Iterate throught the entire image
+        }
+    }
+}
 
 
 Graph::~Graph()
