@@ -22,11 +22,18 @@ using namespace std;
 
 class Edge;
 
+struct vertexID{
+    int row;
+    int col;
+    int creationNr;
+};
+
 class Vertex
 {
 public:
     Vertex();
-    Vertex(int id);
+    Vertex(vertexID id);
+    
     int getIdentifier();
     
     
@@ -40,11 +47,16 @@ public:
     void setGoal();
     void setStart();
     
+    
+    
     bool getGoalstate();
     
     vector<Edge*> EdgeInList;
     
-    
+    int getRow();
+    int getCol();
+    int getCreate();
+    vertexID returnID();
 
     ~Vertex();
 
@@ -54,7 +66,7 @@ private:
     bool start;
     bool goal;
     
-    int name;
+    vertexID name;
     int indegree;
     
 } ;

@@ -13,12 +13,13 @@ Vertex::Vertex()
 {
 }
 
-Vertex::Vertex(int id)
+Vertex::Vertex(vertexID id)
 {
     start = false;
     goal = false;
     indegree=0;
     name = id;
+    
     
 }
 void Vertex::setGoal(){
@@ -46,6 +47,19 @@ void Vertex::incrementIndegree()
 
 int Vertex::getIdentifier()
 {
+    // THIS DOES NOT WORK
+    return name.creationNr;
+}
+int Vertex::getCreate(){
+    return name.creationNr;
+}
+int Vertex::getCol(){
+    return name.col;
+}
+int Vertex::getRow(){
+    return name.row;
+}
+vertexID Vertex::returnID(){
     return name;
 }
 Vertex::~Vertex()

@@ -10,47 +10,12 @@
 Graph::Graph()
 {
 }
-
-Graph::Graph(int N)
-{
-    V = N;
-    for (int i = 0; i < N; i++)
-    {
-        Vertex * newVertex = new Vertex(i);
-        nodes.push_back(newVertex);
-    }
-}
-/* not working */
-void Graph::InitializeEmpyt(const int x, const int y){
-    for (int i = 0; i<x; i++) {
-        sokoRow.push_back(nullptr);
-        for (int j = 0 ; j<y; j++) {
-            sokoMatrix.push_back(sokoRow);
-        }
-    }
-}
-/* not working */
-void Graph::printMatrix(int x, int y){
-    for (int i=0; i<x; i++) {
-        for (int j=0; j<y; j++) {
-            cout<<sokoMatrix[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-}
-vector<vector<Vertex*>> Graph::addVertex(int x, int y){
-    Vertex * newVertex = new Vertex(1);
-    sokoMatrix[x][y]= newVertex;
-    return sokoMatrix;
-}
-void Graph::sokoAddEdge(int src, int dest, int cost){
-    
-}
-
-
-
-
-
+//
+//vector<vector<Vertex*>> Graph::addVertex(int x, int y){
+//    Vertex * newVertex = new Vertex(1);
+//    sokoMatrix[x][y]= newVertex;
+//    return sokoMatrix;
+//}
 void Graph::addEdge(int src, int dest, int cost)
 {
     Vertex * source = nodes[src];
@@ -113,14 +78,14 @@ void Graph::topsort()
 
 void Graph::printIndegree()
 {
-    for (int i =0; i<V; i++)
+    for (int i =0; i<nrVertex; i++)
     {
         cout<<"Vertice: "<<i<<" has "<<nodes[i]->getIndegree()<<" indegrees"<<endl;
     }
 }
 void Graph::printGraph()
 {
-    for (int i = 0; i < V; i++)
+    for (int i = 0; i < nrVertex; i++)
     {
         cout << "Vertix: " << i << " has " << nodes[i]->EdgeInList.size() << " edges" << endl;
         if (nodes[i]->EdgeInList.size() != 0)
@@ -187,10 +152,10 @@ void Graph::printTree( vector<Edge*> ks)
     for(int i = 0; i<ks.size(); i++)
     {
 
-        cout<<"edge " <<i <<" from " << ks[i]->source->getIdentifier() <<" to "<<ks[i]->destination->getIdentifier()<<"cost "<<ks[i]->cost  <<endl;
+        cout<<"edge " <<i <<" from " << ks[i]->source->getIdentifier() <<" to "<<ks[i]->destination->getIdentifier()<<" cost "<<ks[i]->cost  <<endl;
     }
-
 }
+
 /*******************************
  SOKOBAN MAP RELATED FUNCTIONS
  *******************************/
@@ -258,6 +223,9 @@ void Graph::makingMatrix(string line){
     mapRow.clear();                     // Clearing the row for next line
 
 }
+/*******************************
+ * Extract data from the text file. amount of diamonds, coloums and rows.
+ *******************************/
 void Graph::extractData(string line){
     string tmpTier;
     string tmpEtter;
@@ -294,6 +262,7 @@ void Graph::extractData(string line){
                 
         }
     cout<<endl<<"rows:\t"<<rows<<endl<<"cols:\t"<<cols<<endl<<"Diamonds:\t"<<nrDiamonds<<endl;
+    nrVertex = rows*cols;
 }
 
 /********************************
@@ -309,13 +278,7 @@ void Graph::printfunc(vector<int> anyVec){
  * Print the Map in matrix format.
  *******************************/
 void Graph::printMapMatrix(){
-    /*
-    for (int i = 0; i<9; i++) {
-        cout<<mapMatrix[i][0]<<" ";
-    }
-    cout<<endl;
-    */
-    
+
     cout<<endl;
     for (int i = 0; i<rows; i++) {
         for (int j = 0; j<cols; j++) {
@@ -335,14 +298,128 @@ void Graph::printMapContent(){
  * Mapping the Matrix into a graph structure.
  *******************************/
 void Graph::makeGraph(){
-    for (int i = 0; i<rows; i++) {
-        for (int j = 0; j<cols; i++) {
+    static int counter= 0;
+    //int G = rows*cols;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j<cols; j++) {
+        
+                
             
-            //Iterate throught the entire image
-        }
+            vertexID newVertexID ;
+            newVertexID.row = i;
+            newVertexID.col = j;
+            newVertexID.creationNr = counter++;
+
+        Vertex * newVertex = new Vertex(newVertexID);
+        nodes.push_back(newVertex);
+            }
+        
+//            vertexID * nv = new vertexID(newVertexID);
+//            nodesID.push_back(nv);
+        
+    }
+}
+void Graph::sokoAddEdge(vertexID  src, vertexID dest, int cost){
+    Vertex * source = nodes[src.creationNr];
+    Vertex * destination = nodes[dest.creationNr];
+    Edge *newEdge = new Edge(source, destination, cost);
+    nodes[src.creationNr]->EdgeInList.push_back(newEdge);
+    nodes[dest.creationNr]->incrementIndegree();
+    edgePointer.push_back(newEdge);
+}
+/*******************************
+ * Printing the edges in the sokoban graph
+ *******************************/
+void Graph::printSokoGraph(vector<Edge *> g){
+    for (int i = 0; i<g.size(); i++) {
+        cout<<"edge " <<i <<" from " << g[i]->source->getRow()<<"," <<g[i]->source->getCol()<<" to "<<g[i]->destination->getRow()<<","<<g[i]->destination->getCol()<<" cost "<<g[i]->cost  <<endl;
     }
 }
 
+
+void Graph::linkGraph(){
+    static int index = 0;
+    static int tmp = 0;
+    static int tmp2 =0;
+    //for debugging purposes - wrong for loops
+    for (int i = 0; i <rows; i++) {
+        for (int j =0; j <cols; j++) {
+            
+            //Go through MapMatrix and look at neighbours.
+            /*
+             * Looking a everything not a wall
+             **/
+//            if (mapMatrix[i][j] != 1 ){
+            cout<<mapMatrix[i][j]<<" ";
+            if (j>! cols) {
+            
+                if ( (mapMatrix[i][j+1] == 2 ) && (mapMatrix[i][j] !=1)) {
+                    tmp2++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index+1]->returnID(), 1);
+                    sokoAddEdge(nodes[index+1]->returnID(), nodes[index]->returnID(), 1);
+                    
+                }
+                if ((mapMatrix[i][j+1] == 8 ) && (mapMatrix[i][j] !=1)) {
+                    tmp2++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index+1]->returnID(), 1);
+                    sokoAddEdge(nodes[index+1]->returnID(), nodes[index]->returnID(), 1);
+                }
+                if ((mapMatrix[i][j+1] == 9 ) && (mapMatrix[i][j] !=1)) {
+                    tmp2++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index+1]->returnID(), 1);
+                    sokoAddEdge(nodes[index+1]->returnID(), nodes[index]->returnID(), 1);
+                }
+                if ((mapMatrix[i][j+1] == 5 ) && (mapMatrix[i][j] !=1)) {
+                    tmp2++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index+1]->returnID(), 1);
+                    sokoAddEdge(nodes[index+1]->returnID(), nodes[index]->returnID(), 1);
+                }
+            }
+            if (i >! -1){
+                
+                if ( (mapMatrix[i-1][j] == 2 )&& (mapMatrix[i][j] !=1) ) {
+                    tmp++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index-cols]->returnID(), 1);
+                    sokoAddEdge(nodes[index-cols]->returnID(), nodes[index]->returnID(), 1);
+                }
+
+                if ((mapMatrix[i-1][j] == 8 )&& (mapMatrix[i][j] !=1) ) {
+                    tmp++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index-cols]->returnID(), 1);
+                    sokoAddEdge(nodes[index-cols]->returnID(), nodes[index]->returnID(), 1);
+                }
+                if ((mapMatrix[i-1][j] == 9 )&& (mapMatrix[i][j] !=1)) {
+                    tmp++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index-cols]->returnID(), 1);
+                    sokoAddEdge(nodes[index-cols]->returnID(), nodes[index]->returnID(), 1);
+                }
+                if ((mapMatrix[i-1][j] == 5 )&& (mapMatrix[i][j] !=1)) {
+                    tmp++;
+                    sokoAddEdge(nodes[index]->returnID(), nodes[index-cols]->returnID(), 1);
+                    sokoAddEdge(nodes[index-cols]->returnID(), nodes[index]->returnID(), 1);
+                }
+            }
+//            }
+            index++;
+         
+        }
+        cout<<endl;
+        //cout<<"above:"<<tmp<<endl;
+        //cout<<"beside:"<<tmp2<<endl;
+    }
+    cout<<"nodes"<<nodes.size()<<endl;
+    printSokoGraph(edgePointer);
+}
+void Graph::Dijkstra(Vertex start, Vertex goal){
+    
+    queue<Vertex*>q;
+    
+    while (!q.empty() ) {
+        
+    }
+    
+}
 
 Graph::~Graph()
 {

@@ -48,13 +48,13 @@ public:
     void makingMatrix(string line);
     void makeGraph();
     void extractData(string line);
-    
-    
-    
-    void InitializeEmpyt(const int x, const int y);
+    void linkGraph();
+    //void InitializeEmpyt(const int x, const int y);
     void printMatrix(int x, int y);
     vector<vector<Vertex*>> addVertex(int x, int y);
-    void sokoAddEdge(int src, int dest, int cost);
+    void sokoAddEdge(vertexID src,vertexID dest, int cost);
+    
+    void Dijkstra(Vertex start, Vertex goal);
     /*******************************
      DEBUG
      *******************************/
@@ -62,6 +62,7 @@ public:
     void printMapContent();     //Printing the map read from .txt file
     void printfunc(vector<int> anyVec);
     void printMapMatrix();
+    void printSokoGraph(vector<Edge*>g);
     
 
 /****** KRUSKAL****/
@@ -71,16 +72,21 @@ public:
     vector<Edge*> getVertex();
     queue<Edge*> cheapQueue(vector<Edge*>ks);
     ~Graph();
+    
+    
+    
 private:
     /*-------- Sokoban privates --------*/
-    vector<Vertex*> sokoRow;
-    vector<vector<Vertex*> > sokoMatrix;
+    //vector<Vertex*> sokoRow;
+    //vector<vector<Vertex*> > sokoMatrix;
+   
     /*-------- MAP privates --------*/
     vector<vector<int> >mapMatrix;
     vector<int>mapRow;
     int nrDiamonds;
     int rows;
     int cols;
+    int nrVertex;
     
     string test = {"this is my test 1234567890"};        //only for debugging purpose 5/10-2017
     
@@ -88,12 +94,9 @@ private:
     string map_content;
     /*----------------------------------*/
     vector<Vertex*> nodes;
+//    vector<vertexID*> nodesID;
 
     vector<Edge*>edgePointer;
-    
-    
-    
-    
     vector<Edge*> mst;// minimum spanning tree
     
     queue<Edge*>cheapest;
@@ -101,9 +104,6 @@ private:
     
     Vertex* tmp;
     
-    
-    
-    int V;
 };
 
 
