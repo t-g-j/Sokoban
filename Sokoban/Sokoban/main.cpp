@@ -82,6 +82,7 @@ int main() {
     map.makeGraph();
     map.linkGraph();
     
+    map.Dijkstra(map.returnVertex(18), map.returnVertex(25));
     return 0;
 }
 

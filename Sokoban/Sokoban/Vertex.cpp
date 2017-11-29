@@ -19,8 +19,18 @@ Vertex::Vertex(vertexID id)
     goal = false;
     indegree=0;
     name = id;
+    known = false;
     
     
+}
+bool Vertex::status(){
+    return known;
+}
+void Vertex::hide(){
+    known = false;
+}
+void Vertex::discover(){
+    known = true;
 }
 void Vertex::setGoal(){
     goal = true;

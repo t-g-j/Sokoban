@@ -288,9 +288,9 @@ void Graph::printMapMatrix(){
     }
 }
 
-/*
+/*******************************
  * Print private member containing the map
- */
+ *******************************/
 void Graph::printMapContent(){
     cout<<map_content<<endl;
 }
@@ -303,9 +303,6 @@ void Graph::makeGraph(){
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j<cols; j++) {
-        
-                
-            
             vertexID newVertexID ;
             newVertexID.row = i;
             newVertexID.col = j;
@@ -320,6 +317,7 @@ void Graph::makeGraph(){
         
     }
 }
+
 void Graph::sokoAddEdge(vertexID  src, vertexID dest, int cost){
     Vertex * source = nodes[src.creationNr];
     Vertex * destination = nodes[dest.creationNr];
@@ -327,6 +325,53 @@ void Graph::sokoAddEdge(vertexID  src, vertexID dest, int cost){
     nodes[src.creationNr]->EdgeInList.push_back(newEdge);
     nodes[dest.creationNr]->incrementIndegree();
     edgePointer.push_back(newEdge);
+}
+
+void Graph::Dijkstra(Vertex* start, Vertex* goal){
+    queue<Vertex*>q;
+    for (int i = 0; i<nodes.size(); i++) {          //Seting all the cost to infinity and unknown
+        for (int j = 0; j<nodes[i]->EdgeInList.size(); j++) {
+            nodes[i]->EdgeInList[j]->cost = my_INF; //Setting cost to infinity
+            nodes[i]->hide();                       //Setting known to false
+        }
+    }
+    int tmp = nodes[start->getCreate()]->EdgeInList.size();
+    
+    for(int i = 0; i<tmp;i++){                          //Setting the cost for current vertex to zero
+        nodes[start->getCreate()]->EdgeInList[i]->cost=0;
+    }
+    q.push(start);                                      //enqueue first vertex
+    
+        while (!q.empty() ) {
+            Vertex* v = q.front();
+            q.pop();
+            v->discover();
+            
+            int crNr = start->getCreate();
+//            cout<<nodes[crNr]->EdgeInList.size()<<endl;
+            cout<<"S row: "<<v->getRow()<<" S col: "<<v->getCol()<<endl;
+//            cout<<"S row: "<<nodes[crNr]->getRow()<<" S col: "<<nodes[crNr]->getCol()<<endl;
+            
+//            cout<<nodes[crNr]->EdgeInList[0]->cost<<endl;
+    
+            for(int i = 0; i<v->EdgeInList.size(); i++){
+                Vertex* vTmp = v->EdgeInList[i]->destination;
+                
+                if (!vTmp->status()) {                      //Check if the next vertex i known
+                    cout<<"row: "<<vTmp->getRow()<<" col: "<<vTmp->getCol()<<endl;
+                    cout<<"vertex is unknown"<<endl;
+//                    pathLenght = ;
+                
+                    if ( vTmp->EdgeInList[0]->cost == my_INF ) {
+                        cout<<"very expansive"<<endl;
+                    }
+                }
+                
+            }
+        }
+}
+Vertex* Graph::returnVertex(int nr){
+    return nodes[nr];
 }
 /*******************************
  * Printing the edges in the sokoban graph
@@ -411,15 +456,7 @@ void Graph::linkGraph(){
     cout<<"nodes"<<nodes.size()<<endl;
     printSokoGraph(edgePointer);
 }
-void Graph::Dijkstra(Vertex start, Vertex goal){
-    
-    queue<Vertex*>q;
-    
-    while (!q.empty() ) {
-        
-    }
-    
-}
+
 
 Graph::~Graph()
 {

@@ -46,6 +46,9 @@ public:
     // Set the start and goal node.
     void setGoal();
     void setStart();
+    void discover();
+    void hide();
+    bool status();
     
     
     
@@ -65,6 +68,7 @@ private:
     //start and stop signals for A*
     bool start;
     bool goal;
+    bool known;
     
     vertexID name;
     int indegree;

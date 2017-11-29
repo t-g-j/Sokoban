@@ -22,6 +22,8 @@
 
 #include <fstream>
 
+#define my_INF  1000000
+
 using namespace std;
 
 class Graph
@@ -54,7 +56,8 @@ public:
     vector<vector<Vertex*>> addVertex(int x, int y);
     void sokoAddEdge(vertexID src,vertexID dest, int cost);
     
-    void Dijkstra(Vertex start, Vertex goal);
+    void Dijkstra(Vertex* start, Vertex* goal);
+    Vertex* returnVertex(int nr);
     /*******************************
      DEBUG
      *******************************/
@@ -92,6 +95,10 @@ private:
     
     
     string map_content;
+    /*---------- Dijkstra's ------------*/
+    vector<Vertex*>path;
+    int pathLenght;
+    
     /*----------------------------------*/
     vector<Vertex*> nodes;
 //    vector<vertexID*> nodesID;
