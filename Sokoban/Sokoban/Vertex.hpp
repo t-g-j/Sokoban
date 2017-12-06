@@ -59,6 +59,11 @@ public:
     int getRow();
     int getCol();
     int getCreate();
+    void setCost(int price);
+    int getCost();
+    void setPath(int pathPointer);
+    int getpath();
+    
     vertexID returnID();
 
     ~Vertex();
@@ -69,6 +74,8 @@ private:
     bool start;
     bool goal;
     bool known;
+    int vCost;
+    int path;
     
     vertexID name;
     int indegree;

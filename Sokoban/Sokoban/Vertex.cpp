@@ -20,8 +20,14 @@ Vertex::Vertex(vertexID id)
     indegree=0;
     name = id;
     known = false;
-    
-    
+    vCost = 0;
+    path = 0;
+}
+void Vertex::setPath(int pathPointer){
+    path=pathPointer;
+}
+int Vertex::getpath(){
+    return path;
 }
 bool Vertex::status(){
     return known;
@@ -68,6 +74,12 @@ int Vertex::getCol(){
 }
 int Vertex::getRow(){
     return name.row;
+}
+int Vertex::getCost(){
+    return vCost;
+}
+void Vertex::setCost(int price){
+    vCost = price;
 }
 vertexID Vertex::returnID(){
     return name;

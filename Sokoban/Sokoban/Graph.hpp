@@ -19,6 +19,7 @@
 
 #include <vector>
 #include <queue>
+#include <list>
 
 #include <fstream>
 
@@ -57,6 +58,7 @@ public:
     void sokoAddEdge(vertexID src,vertexID dest, int cost);
     
     void Dijkstra(Vertex* start, Vertex* goal);
+    void printPath(int start, int end);
     Vertex* returnVertex(int nr);
     /*******************************
      DEBUG
@@ -97,7 +99,7 @@ private:
     string map_content;
     /*---------- Dijkstra's ------------*/
     vector<Vertex*>path;
-    int pathLenght;
+    int edgeCost;
     
     /*----------------------------------*/
     vector<Vertex*> nodes;

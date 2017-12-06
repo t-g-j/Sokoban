@@ -317,7 +317,9 @@ void Graph::makeGraph(){
         
     }
 }
-
+/*******************************
+ * Adding edges between the vertecies
+ *******************************/
 void Graph::sokoAddEdge(vertexID  src, vertexID dest, int cost){
     Vertex * source = nodes[src.creationNr];
     Vertex * destination = nodes[dest.creationNr];
@@ -326,28 +328,50 @@ void Graph::sokoAddEdge(vertexID  src, vertexID dest, int cost){
     nodes[dest.creationNr]->incrementIndegree();
     edgePointer.push_back(newEdge);
 }
-
+/*******************************
+ * Dijkstra's shortest path algorithm - 3 Dimensions
+ *******************************/
 void Graph::Dijkstra(Vertex* start, Vertex* goal){
-    queue<Vertex*>q;
+    
+    vector<Vertex*>my_q;                            //Vector queue
     for (int i = 0; i<nodes.size(); i++) {          //Seting all the cost to infinity and unknown
         for (int j = 0; j<nodes[i]->EdgeInList.size(); j++) {
-            nodes[i]->EdgeInList[j]->cost = my_INF; //Setting cost to infinity
+            nodes[i]->setCost(my_INF);              //Setting cost of Vertexes to infinity
             nodes[i]->hide();                       //Setting known to false
         }
     }
-    int tmp = nodes[start->getCreate()]->EdgeInList.size();
+    nodes[start->getCreate()]->setCost(0);          //Setting the cost for current vertex to zero
+//    int tmp = nodes[start->getCreate()]->EdgeInList.size();
+//    for(int i = 0; i<tmp;i++){
+//        nodes[start->getCreate()]->EdgeInList[i]->cost=0;
+//    }
+    my_q.push_back(start);                                      //enqueue first vertex
     
-    for(int i = 0; i<tmp;i++){                          //Setting the cost for current vertex to zero
-        nodes[start->getCreate()]->EdgeInList[i]->cost=0;
-    }
-    q.push(start);                                      //enqueue first vertex
-    
-        while (!q.empty() ) {
-            Vertex* v = q.front();
-            q.pop();
-            v->discover();
+//      Debugging my_queue
+//    nodes[17]->setCost(20);
+//    nodes[18]->setCost(100);
+//    nodes[16]->setCost(40);
+//    my_q.push_back(nodes[17]);
+//    my_q.push_back(nodes[18]);
+//    my_q.push_back(nodes[16]);
+    Vertex* qPark;                                              //temp variable for sorting
+        while (!my_q.empty() ) {
             
-            int crNr = start->getCreate();
+            for (int i = 0; i<my_q.size(); i++) {       //Bubblesort the queuing vector
+                for (int j = my_q.size()-1; j>i; j--) {
+                    if (my_q[j]->getCost() < my_q[j-1]->getCost() ) {
+                        qPark=my_q[j-1];
+                        my_q[j-1]=my_q[j];
+                        my_q[j]=qPark;
+                    }
+                }
+            }
+            Vertex* v = my_q.front();
+            my_q.erase(my_q.begin());
+    
+            v->discover();
+            v->setCost(0);
+//            int crNr = start->getCreate();
 //            cout<<nodes[crNr]->EdgeInList.size()<<endl;
             cout<<"S row: "<<v->getRow()<<" S col: "<<v->getCol()<<endl;
 //            cout<<"S row: "<<nodes[crNr]->getRow()<<" S col: "<<nodes[crNr]->getCol()<<endl;
@@ -359,16 +383,54 @@ void Graph::Dijkstra(Vertex* start, Vertex* goal){
                 
                 if (!vTmp->status()) {                      //Check if the next vertex i known
                     cout<<"row: "<<vTmp->getRow()<<" col: "<<vTmp->getCol()<<endl;
-                    cout<<"vertex is unknown"<<endl;
-//                    pathLenght = ;
-                
-                    if ( vTmp->EdgeInList[0]->cost == my_INF ) {
-                        cout<<"very expansive"<<endl;
+//                    cout<<"vertex is unknown"<<endl;
+                    edgeCost = v->EdgeInList[i]->cost;
+//                   cout<<"cost "<<edgeCost<<endl;
+//                    cout<<"nabo cost "<<vTmp->getCost()<<endl;
+//                    cout<<"v cost"<<v->getCost()<<endl;
+                    if ( (v->getCost() + edgeCost ) < vTmp->getCost() ) {
+                        //update w aka vTmp
+//                        cout<<"if"<<endl;
+                        vTmp->setCost(v->getCost()+edgeCost);
+                        vTmp->setPath(v->getCreate());
+                        cout<<"cost "<<vTmp->getCost()<<endl;
+//                        cout<<"path: "<<vTmp->getpath()<<endl;
+                        if (vTmp == goal) {
+                            break;
+                        }
+                        my_q.push_back(vTmp);
                     }
                 }
-                
             }
         }
+    
+    /****** Print dijkstra ****/
+    Vertex* nxt;
+    cout<<"start"<<endl;
+//    cout<<"row "<<nodes[start->getCreate()]->getRow()<<" col "<<nodes[start->getCreate()]->getCol()<<endl;
+    cout<<start->getCreate()<<endl;
+//    cout<<"before goal"<<endl;
+    
+    
+    nxt = nodes[goal->getpath()];
+//    cout<<goal->getpath()<<endl;
+//    cout<<nxt->getpath()<<endl;
+    int bla = nxt->getpath();
+    int bla2 = nodes[bla]->getpath();
+    int bla3 =nodes[bla2]->getpath();
+    cout<<nodes[bla3]->getCreate()<<endl;
+    cout<<"row "<<nodes[bla3]->getRow()<<" col "<<nodes[bla3]->getCol()<<endl;
+    cout<<"row "<<nodes[bla2]->getRow()<<" col "<<nodes[bla2]->getCol()<<endl;
+    cout<<"row "<<nodes[bla]->getRow()<<" col "<<nodes[bla]->getCol()<<endl;
+
+    
+    cout<<"row "<<nodes[goal->getpath()]->getRow()<<" col "<<nodes[goal->getpath()]->getCol()<<endl;
+    cout<<"goal"<<endl;
+    cout<<"row "<<nodes[goal->getCreate()]->getRow()<<" col "<<nodes[goal->getCreate()]->getCol()<<endl;
+    
+}
+void Graph::printPath(int start, int end){
+    
 }
 Vertex* Graph::returnVertex(int nr){
     return nodes[nr];
